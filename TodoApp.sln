@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E7DAB5F0-746F-41EE-BB1B-25B299DDF973}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{7678E764-C8E4-4B55-A49B-B3E7F0213F4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Mobile", "TodoApp.Mobile\TodoApp.Mobile.csproj", "{DED551B2-8EE4-44A1-AFCC-5D273331D91E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.WebAPI", "TodoApp.WebAPI\TodoApp.WebAPI.csproj", "{B899BBC9-BF21-4347-A648-8CC505243431}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Shared", "TodoApp.Shared\TodoApp.Shared.csproj", "{BE9063C2-793F-405E-9C0E-41CF36E5A8BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DED551B2-8EE4-44A1-AFCC-5D273331D91E} = {7678E764-C8E4-4B55-A49B-B3E7F0213F4E}
+		{B899BBC9-BF21-4347-A648-8CC505243431} = {7678E764-C8E4-4B55-A49B-B3E7F0213F4E}
+		{BE9063C2-793F-405E-9C0E-41CF36E5A8BA} = {E7DAB5F0-746F-41EE-BB1B-25B299DDF973}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DED551B2-8EE4-44A1-AFCC-5D273331D91E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED551B2-8EE4-44A1-AFCC-5D273331D91E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED551B2-8EE4-44A1-AFCC-5D273331D91E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED551B2-8EE4-44A1-AFCC-5D273331D91E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B899BBC9-BF21-4347-A648-8CC505243431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B899BBC9-BF21-4347-A648-8CC505243431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B899BBC9-BF21-4347-A648-8CC505243431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B899BBC9-BF21-4347-A648-8CC505243431}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE9063C2-793F-405E-9C0E-41CF36E5A8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE9063C2-793F-405E-9C0E-41CF36E5A8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE9063C2-793F-405E-9C0E-41CF36E5A8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE9063C2-793F-405E-9C0E-41CF36E5A8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
