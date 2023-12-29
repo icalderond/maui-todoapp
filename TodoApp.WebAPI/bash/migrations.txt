@@ -1,0 +1,8 @@
+// Add new migration
+dotnet ef migrations add InitialMigration
+
+// Revert migration
+// Remove all changes between current migration and indicated in command
+dotnet ef database update InitialMigration
+// Remove currents migrations
+dotnet ef migrations remove

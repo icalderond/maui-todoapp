@@ -14,8 +14,8 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     TodoEFContext context = scope.ServiceProvider.GetRequiredService<TodoEFContext>();
-    context.Database.EnsureCreated();
-    // context.Database.Migrate();
+    // context.Database.EnsureCreated();
+    context.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.
