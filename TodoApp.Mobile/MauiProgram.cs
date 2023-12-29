@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using TodoApp.Mobile.Pages;
+using TodoApp.Mobile.ViewModels;
 
 namespace TodoApp.Mobile;
 
@@ -15,6 +17,11 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        // Pages
+        builder.Services.AddTransient<TodoItemsPage>();
+        
+        // ViewModels
+        builder.Services.AddTransient<TodoItemsViewModel>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
