@@ -1,34 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
 using TodoApp.Shared.Models;
 using TodoApp.WebAPI.Repositories;
+using TodoApp.WebAPI.Services;
 
 namespace TodoApp.WebAPI.Controllers;
 
 public class TodoItemControllers : Controller
 {
     public readonly IToDoItemRepository _ToDoItemRepository;
+    public readonly ToDoItemWithTagService _ToDoItemWithTagService;
 
-    public TodoItemControllers(IToDoItemRepository toDoItemRepository)
+    public TodoItemControllers(IToDoItemRepository toDoItemRepository, ToDoItemWithTagService toDoItemWithTagService)
     {
         _ToDoItemRepository = toDoItemRepository;
+        _ToDoItemWithTagService = toDoItemWithTagService;
     }
 
     [HttpPost("AddTodoItem")]
     public async Task AddTodoItem()
     {
-        ToDoItem toDoItem = new ToDoItem()
-        {
-            Title = "Title from controller",
-            Content =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            Tags = new List<Tag>()
-            {
-                new Tag() { Title = "Personal", Description = "Personal tag" },
-                new Tag() { Title = "Professional", Description = "Professional tag" }
-            }
-        };
-
-        await _ToDoItemRepository.Insert(toDoItem);
+        await _ToDoItemWithTagService.Execute();
     }
 
     [HttpGet("{todoItemId}")]
