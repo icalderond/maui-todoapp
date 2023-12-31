@@ -13,4 +13,6 @@ public class ToDoItem
     public string Content { get; set; }
 
     public DateTime UpdateDate { get; set; }
+
+    public ICollection<Tag> Tags { get; set; }
 }

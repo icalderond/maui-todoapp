@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoApp.WebAPI.Contexts;
 
@@ -11,9 +12,11 @@ using TodoApp.WebAPI.Contexts;
 namespace TodoApp.WebAPI.Migrations
 {
     [DbContext(typeof(TodoEFContext))]
-    partial class TodoEFContextModelSnapshot : ModelSnapshot
+    [Migration("20231231172326_LinkToDoItemAndTags")]
+    partial class LinkToDoItemAndTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
