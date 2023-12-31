@@ -7,6 +7,7 @@ namespace TodoApp.WebAPI.Contexts;
 public class TodoEFContext : DbContext
 {
     public  DbSet<ToDoItem> ToDoItem { get; set; }
+    public  DbSet<Tag> Tag { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoApp.WebAPI.Contexts;
 
@@ -11,9 +12,11 @@ using TodoApp.WebAPI.Contexts;
 namespace TodoApp.WebAPI.Migrations
 {
     [DbContext(typeof(TodoEFContext))]
-    partial class TodoEFContextModelSnapshot : ModelSnapshot
+    [Migration("20231231200202_AddTodoItemIdRel")]
+    partial class AddTodoItemIdRel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,26 +82,24 @@ namespace TodoApp.WebAPI.Migrations
                             Id = 1,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "My Note",
-                            UpdateDate = new DateTime(2023, 12, 31, 14, 23, 43, 804, DateTimeKind.Local).AddTicks(5910)
+                            UpdateDate = new DateTime(2023, 12, 31, 14, 2, 2, 355, DateTimeKind.Local).AddTicks(4770)
                         },
                         new
                         {
                             Id = 2,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "My Note 2",
-                            UpdateDate = new DateTime(2023, 12, 31, 14, 23, 43, 804, DateTimeKind.Local).AddTicks(5990)
+                            UpdateDate = new DateTime(2023, 12, 31, 14, 2, 2, 355, DateTimeKind.Local).AddTicks(4810)
                         });
                 });
 
             modelBuilder.Entity("TodoApp.Shared.Models.Tag", b =>
                 {
-                    b.HasOne("TodoApp.Shared.Models.ToDoItem", "ToDoItem")
+                    b.HasOne("TodoApp.Shared.Models.ToDoItem", null)
                         .WithMany("Tags")
                         .HasForeignKey("ToDoItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ToDoItem");
                 });
 
             modelBuilder.Entity("TodoApp.Shared.Models.ToDoItem", b =>
