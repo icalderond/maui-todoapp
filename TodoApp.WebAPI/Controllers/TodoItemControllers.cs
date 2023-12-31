@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TodoApp.Shared.Models;
-using TodoApp.WebAPI.Contexts;
+using TodoApp.WebAPI.Repositories;
 
 namespace TodoApp.WebAPI.Controllers;
 
 public class TodoItemControllers : Controller
 {
-    public readonly TodoEFContext _context;
+    public readonly IToDoItemRepository _ToDoItemRepository;
 
-    public TodoItemControllers(TodoEFContext context)
+    public TodoItemControllers(IToDoItemRepository toDoItemRepository)
     {
-        _context = context;
+        _ToDoItemRepository = toDoItemRepository;
     }
 
     [HttpPost("AddTodoItem")]
@@ -29,15 +28,12 @@ public class TodoItemControllers : Controller
             }
         };
 
-        await _context.ToDoItem.AddAsync(toDoItem);
-        await _context.SaveChangesAsync();
+        await _ToDoItemRepository.Insert(toDoItem);
     }
 
     [HttpGet("{todoItemId}")]
     public async Task<ToDoItem?> Get(int todoItemId)
     {
-        return await _context.ToDoItem
-            .Include(x=>x.Tags)
-            .FirstOrDefaultAsync(x => x.Id == todoItemId);
+        return await _ToDoItemRepository.GetById(todoItemId);
     }
 }

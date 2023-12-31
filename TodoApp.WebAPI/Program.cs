@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TodoApp.WebAPI.Contexts;
+using TodoApp.WebAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TodoEFContext>();
+builder.Services.AddScoped<IToDoItemRepository, ToDoItemRepository>();
 
 var app = builder.Build();
 
