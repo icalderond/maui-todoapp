@@ -13,7 +13,7 @@ public class ToDoItemWithTagService
         _UnitOfWork = unitOfWork;
     }
 
-    public async Task Execute()
+    public async Task<bool> Execute()
     {
         var toDoItem = new ToDoItem()
         {
@@ -41,5 +41,7 @@ public class ToDoItemWithTagService
         await _UnitOfWork._ToDoItemRepository.Insert(toDoItem);
         await _UnitOfWork._TagRepository.Insert(tags);
         await _UnitOfWork.Save();
+
+        return true;
     }
 }

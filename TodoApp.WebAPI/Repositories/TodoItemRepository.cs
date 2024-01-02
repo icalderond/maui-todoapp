@@ -26,10 +26,24 @@ public class ToDoItemRepository : IToDoItemRepository
             .Include(x => x.Tags)
             .FirstOrDefaultAsync(x => x.Id == toDoItemId);
     }
+
+    public async Task<List<ToDoItem>?> GetAllPersonal()
+    {
+        return await _context.ToDoItem
+            .Include(x => x.Tags.Where(t => t.Title == "Personal"))
+            .ToListAsync();
+    }
+
+    public async Task<List<ToDoItem>?> GetAll()
+    {
+        return await _context.ToDoItem.ToListAsync();
+    }
 }
 
 public interface IToDoItemRepository
 {
     Task<ToDoItem?> Insert(ToDoItem toDoItem);
     Task<ToDoItem?> GetById(int toDoItemId);
+    Task<List<ToDoItem>?> GetAllPersonal();
+    Task<List<ToDoItem>?> GetAll();
 }
