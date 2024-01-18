@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using TodoApp.Mobile.Interfaces;
 using TodoApp.Mobile.Pages;
+using TodoApp.Mobile.Services;
 using TodoApp.Mobile.ViewModels;
 
 namespace TodoApp.Mobile;
@@ -22,6 +24,9 @@ public static class MauiProgram
         
         // ViewModels
         builder.Services.AddTransient<TodoItemsViewModel>();
+        
+        // Services
+        builder.Services.AddSingleton<ITodoItemService, TodoItemService>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
