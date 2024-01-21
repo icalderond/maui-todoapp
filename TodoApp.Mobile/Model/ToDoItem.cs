@@ -1,18 +1,40 @@
-using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
+using TodoApp.Mobile.ViewModels;
 
 namespace TodoApp.Shared.Models;
 
-public class ToDoItem
+public class ToDoItem:BaseViewModel
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [MaxLength(50)]
+    [JsonPropertyName("title")]
     public string Title { get; set; }
-    
-    [MaxLength(150)]
+
+    [JsonPropertyName("content")]
     public string Content { get; set; }
 
+    [JsonPropertyName("updateDate")]
     public DateTime UpdateDate { get; set; }
+    
+    private ICollection<Tag>? _Tags;
 
-    public ICollection<Tag> Tags { get; set; }
+    [JsonPropertyName("tags")]
+    public ICollection<Tag>? Tags
+    {
+        get => _Tags;
+        set
+        {
+            SetProperty(ref _Tags, value);
+            OnPropertyChanged(nameof(TagsString));
+        }
+    }
+
+    private string _TagsString;
+    public string TagsString
+    {
+        get => Tags?.Any()==true? string.Join(',',Tags.Select(x => x.Title)):"";
+        set => SetProperty(ref _TagsString, value);
+    }
 }
+

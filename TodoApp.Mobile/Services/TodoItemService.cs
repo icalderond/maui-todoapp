@@ -7,7 +7,7 @@ namespace TodoApp.Mobile.Services;
 
 public class TodoItemService:ITodoItemService
 {
-    private readonly string UrlBase = "http://192.168.0.123:5043/";
+    private readonly string UrlBase = "http://192.168.0.110:5043/";
     private readonly string GetAllMethod = "GetAll";
     
     public async Task<List<ToDoItem>?> GetAllTodo()
