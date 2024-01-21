@@ -1,13 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TodoApp.Mobile.Pages.TodoItemsPage">
+             x:Class="TodoApp.Mobile.Pages.TodoItemsPage"
+             xmlns:viewmodels = "clr-namespace:TodoApp.Mobile.ViewModels"
+             xmlns:models ="clr-namespace:TodoApp.Shared.Models"
+             Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-        <VerticalStackLayout VerticalOptions="Center"
-                             BackgroundColor="Cyan"
-                             Margin="40,0">
-            <Label>This is a test</Label>
-        </VerticalStackLayout>
+        <Grid RowDefinitions="auto,auto,*">
+            <!-- Welcome user -->
+            <HorizontalStackLayout Padding="15,0">
+                <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HasShadow="False"
+                       IsClippedToBounds="True">
+                    <Image WidthRequest="50" HeightRequest="50"
+                           BackgroundColor="DarkSlateGray"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+                </Frame>
+                <VerticalStackLayout VerticalOptions="Center"
+                                     Margin="10,0,0,0">
+                    <Label Text="Good morning" />
+                    <Label Text="Nazifa Tusi"
+                           FontAttributes="Bold"
+                           FontSize="Large" />
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <!-- Search -->
+            <SearchBar Grid.Row="1" 
+                       Margin="15,0"
+                       Placeholder="Search your notes"
+                       BackgroundColor="#F4F2FF"
+                       TextColor="#7A69CA"
+                       PlaceholderColor="DarkGray"/>
+
+            <!-- Notes preview -->
+            <CollectionView Grid.Row="2" 
+                            Margin="15,10"
+                            ItemsSource="{Binding DummyData}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     VerticalItemSpacing="20"
+                                     HorizontalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="False"
+                               CornerRadius="30"
+                               Padding="0"
+                               IsClippedToBounds="True"
+                               HeightRequest="200"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               BackgroundColor="#FFFBEF"
+                               BorderColor="#FEEAA1">
+                            <Grid RowDefinitions="auto,*,auto">
+                                <Label Grid.Row="0" 
+                                       Margin="10,15,10,0"
+                                       Text="{Binding TagsString}" 
+                                       TextColor="Black"/>
+                                <Label Grid.Row="1" 
+                                       Margin="10,0"
+                                       Text="{Binding Title}" 
+                                       TextColor="Black"
+                                       FontSize="Medium"
+                                       FontAttributes="Bold"/>
+                                <Grid BackgroundColor="#FEEAA1"
+                                      Grid.Row="2"
+                                      Padding="20,15"
+                                      ColumnDefinitions="*,auto">
+                                     <Label  Grid.Column="0" 
+                                             Text="{Binding UpdateDate,StringFormat='{}{0:MMMM dd, h:mm tt}'}" 
+                                             TextColor="Gray"
+                                             FontAttributes="Bold"/>
+                                     <Label Grid.Column="1" 
+                                            Text="..."
+                                            FontSize="Large"
+                                            HorizontalOptions="End"
+                                            HorizontalTextAlignment="End"
+                                            FontAttributes="Bold"
+                                            TextColor="Gray"/>
+                                </Grid>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <Frame Grid.RowSpan="3"
+                   BackgroundColor="#8270D3"
+                   HeightRequest="50"
+                   WidthRequest="50"
+                   CornerRadius="25"
+                   BorderColor="White"
+                   IsClippedToBounds="True"
+                   HasShadow="False"
+                   VerticalOptions="End"
+                   Padding="0">
+                <Label Text="+"
+                       FontSize="40"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       VerticalOptions="Center"
+                       VerticalTextAlignment="Center"/>
+            </Frame>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
