@@ -21,9 +21,11 @@ public static class MauiProgram
 
         // Pages
         builder.Services.AddTransient<TodoItemsPage>();
+        builder.Services.AddTransient<CreateNewTodoItemPage>();
         
         // ViewModels
         builder.Services.AddTransient<TodoItemsViewModel>();
+        builder.Services.AddTransient<CreateNewTodoItemViewModel>();
         
         // Services
         builder.Services.AddSingleton<ITodoItemService, TodoItemService>();

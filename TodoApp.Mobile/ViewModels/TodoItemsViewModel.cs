@@ -1,10 +1,12 @@
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using TodoApp.Mobile.Interfaces;
 using TodoApp.Shared.Models;
 
 namespace TodoApp.Mobile.ViewModels;
 
-public class TodoItemsViewModel : BaseViewModel
+public partial class TodoItemsViewModel : ObservableObject
 {
     #region Private Properties
     private readonly ITodoItemService _todoItemService;
@@ -17,23 +19,40 @@ public class TodoItemsViewModel : BaseViewModel
     public TodoItemsViewModel(ITodoItemService todoItemService)
     {
         _todoItemService = todoItemService;
-        _ = LoadData();
-    }
-
-    private async Task LoadData()
-    {
-        var todoItems = await _todoItemService.GetAllTodo();
-        if (todoItems != null) DummyData = new ObservableCollection<ToDoItem>(todoItems);
+        _ = Initialize();
     }
     #endregion Lifecycle Methods
 
     #region Public Properties
-    private ObservableCollection<ToDoItem> _dummyData; 
-    public ObservableCollection<ToDoItem> DummyData
+    private ObservableCollection<ToDoItem> _todoItems; 
+    public ObservableCollection<ToDoItem> TodoItems
     {
-        get => _dummyData;
-        set => SetProperty(ref _dummyData, value);
+        get => _todoItems;
+        set => SetProperty(ref _todoItems, value);
     }
-    
     #endregion Public Properties
+
+    #region Public Methods
+    /// <summary>
+    /// Load initial data
+    /// </summary>
+    private async Task Initialize()
+    {
+        //Load data
+        var todoItems = await _todoItemService.GetAllTodo();
+        if (todoItems != null) TodoItems = new ObservableCollection<ToDoItem>(todoItems);
+    }
+
+    [RelayCommand]
+    private async Task OpenNote(object arg)
+    {
+       //await Shell.Current.GoToAsync("");
+    }
+
+    [RelayCommand]
+    private void OpenCreateNewNote(object arg)
+    {
+         Shell.Current.GoToAsync(nameof(CreateNewTodoItemViewModel));
+    }
+    #endregion Public Methods
 }
