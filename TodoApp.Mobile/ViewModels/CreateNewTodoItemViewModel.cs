@@ -6,7 +6,7 @@ using TodoApp.Shared.Models;
 
 namespace TodoApp.Mobile.ViewModels;
 
-public class CreateNewTodoItemViewModel : ObservableObject
+public partial class CreateNewTodoItemViewModel : ObservableObject
 {
     #region Private Properties
     private readonly ITodoItemService _todoItemService;
@@ -35,7 +35,7 @@ public class CreateNewTodoItemViewModel : ObservableObject
     [RelayCommand]
     private async Task OpenNote(object arg)
     {
-        _todoItemService
+        // _todoItemService
     }
     #endregion Public Methods
 }
