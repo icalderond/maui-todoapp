@@ -1,10 +1,8 @@
+using TodoApp.Shared.ModelsBase;
+
 namespace TodoApp.Shared.Models;
 
-public class Tag
+public class Tag : TagBase
 {
-    public int Id { get; set; }
-    public int ToDoItemId { get; set; }
-    public virtual ToDoItem ToDoItem { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
+    public ICollection<TodoItem> ToDoItems { get; set; }
 }

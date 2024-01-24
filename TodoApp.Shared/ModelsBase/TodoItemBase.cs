@@ -1,11 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TodoApp.Shared.Models;
+namespace TodoApp.Shared.ModelsBase;
 
-public class ToDoItem
+public class TodoItemBase
 {
     public int Id { get; set; }
-
+    
     [MaxLength(50)]
     public string Title { get; set; }
     
@@ -13,6 +13,4 @@ public class ToDoItem
     public string Content { get; set; }
 
     public DateTime UpdateDate { get; set; }
-
-    public ICollection<Tag> Tags { get; set; }
 }
