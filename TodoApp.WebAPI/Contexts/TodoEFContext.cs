@@ -6,7 +6,7 @@ namespace TodoApp.WebAPI.Contexts;
 
 public class TodoEFContext : DbContext
 {
-    public  DbSet<ToDoItem> ToDoItem { get; set; }
+    public  DbSet<TodoItem> ToDoItem { get; set; }
     public  DbSet<Tag> Tag { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -22,6 +22,10 @@ public class TodoEFContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Tag>()
+            .HasIndex(x => x.Title)
+            .IsUnique();
+        
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new ToDoItemSeed());
     }

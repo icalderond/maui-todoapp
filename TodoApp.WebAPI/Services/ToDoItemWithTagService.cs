@@ -1,6 +1,6 @@
+using TodoApp.Shared.ModelRequests;
 using TodoApp.Shared.Models;
 using TodoApp.WebAPI.Data;
-using TodoApp.WebAPI.Repositories;
 
 namespace TodoApp.WebAPI.Services;
 
@@ -13,34 +13,55 @@ public class ToDoItemWithTagService
         _UnitOfWork = unitOfWork;
     }
 
-    public async Task<bool> Execute()
+    public async Task<bool> AddTodoItem(TodoItemRequest todoItemRequest)
     {
-        var toDoItem = new ToDoItem()
+        try
         {
-            Title = "Title from controller",
-            Content =
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        };
+            List<Tag> tagsFromDb = new List<Tag>();
+            List<Tag> tagsToDb = new List<Tag>();
 
-        var tags = new List<Tag>()
-        {
-            new Tag()
+            var tagsToInclude = todoItemRequest.TagRequests.Select(
+                x => new Tag
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Description = x.Description
+                }).ToList();
+
+            foreach (var tagRequest in tagsToInclude)
             {
-                Title = "Personal",
-                Description = "Personal tag",
-                ToDoItem = toDoItem
-            },
-            new Tag()
-            {
-                Title = "Professional",
-                Description = "Professional tag",
-                ToDoItem = toDoItem
+                var tag = await _UnitOfWork._TagRepository.GetByTitle(tagRequest.Title);
+                if (tag != null)
+                {
+                    tagsFromDb.Add(tag);
+                }
+                else
+                {
+                    tagRequest.Id = default;
+                    tagsToDb.Add(tagRequest);
+                }
             }
-        };
 
-        await _UnitOfWork._ToDoItemRepository.Insert(toDoItem);
-        await _UnitOfWork._TagRepository.Insert(tags);
-        await _UnitOfWork.Save();
+            var todoItem = new TodoItem()
+            {
+                Title = todoItemRequest.Title,
+                Content = todoItemRequest.Content,
+                UpdateDate = DateTime.Now,
+                Tags = tagsToInclude
+            };
+
+            if (tagsToDb?.Any() == true) tagsToDb.ForEach(x => x.ToDoItems = new List<TodoItem>() { todoItem });
+            
+            await _UnitOfWork._ToDoItemRepository.Insert(todoItem);
+            if (tagsToDb?.Any() == true) 
+                await _UnitOfWork._TagRepository.Insert(tagsToDb);
+            await _UnitOfWork.Save();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
 
         return true;
     }

@@ -22,10 +22,16 @@ public class TagRepository : ITagRepository
     {
         return await _context.Tag.FirstOrDefaultAsync(x => x.Id == tagId);
     }
+
+    public async Task<Tag?> GetByTitle(string tagTitle)
+    {
+        return await _context.Tag.FirstOrDefaultAsync(x => x.Title.ToLower() == tagTitle.ToLower());
+    }
 }
 
 public interface ITagRepository
 {
     Task Insert(IList<Tag> tags);
     Task<Tag?> GetById(int tagId);
+    Task<Tag?> GetByTitle(string tagTitle);
 }

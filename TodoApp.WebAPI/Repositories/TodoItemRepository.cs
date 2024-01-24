@@ -6,44 +6,47 @@ namespace TodoApp.WebAPI.Repositories;
 
 public class ToDoItemRepository : IToDoItemRepository
 {
-    public readonly TodoEFContext _context;
+    private readonly TodoEFContext _context;
 
     public ToDoItemRepository(TodoEFContext context)
     {
         _context = context;
     }
 
-    public async Task<ToDoItem?> Insert(ToDoItem toDoItem)
+    public async Task<TodoItem?> Insert(TodoItem toDoItem)
     {
         var insertedUser = await _context.ToDoItem.AddAsync(toDoItem);
         await _context.SaveChangesAsync();
         return insertedUser.Entity;
     }
 
-    public async Task<ToDoItem?> GetById(int toDoItemId)
+    public async Task<TodoItem?> Delete(int toDoItemId)
+    { 
+        var todoItem = _context.ToDoItem.FirstOrDefault(x => x.Id == toDoItemId);
+        var insertedUser =  _context.ToDoItem.Remove(todoItem);
+        await _context.SaveChangesAsync();
+        return insertedUser.Entity;
+    }
+
+    public async Task<TodoItem?> GetById(int toDoItemId)
     {
         return await _context.ToDoItem
             .Include(x => x.Tags)
             .FirstOrDefaultAsync(x => x.Id == toDoItemId);
     }
 
-    public async Task<List<ToDoItem>?> GetAllPersonal()
+    public async Task<List<TodoItem>?> GetAll()
     {
         return await _context.ToDoItem
-            .Include(x => x.Tags.Where(t => t.Title == "Personal"))
+            .Include(x => x.Tags)
             .ToListAsync();
-    }
-
-    public async Task<List<ToDoItem>?> GetAll()
-    {
-        return await _context.ToDoItem.ToListAsync();
     }
 }
 
 public interface IToDoItemRepository
 {
-    Task<ToDoItem?> Insert(ToDoItem toDoItem);
-    Task<ToDoItem?> GetById(int toDoItemId);
-    Task<List<ToDoItem>?> GetAllPersonal();
-    Task<List<ToDoItem>?> GetAll();
+    Task<TodoItem?> Insert(TodoItem toDoItem);
+    Task<TodoItem?> Delete(int toDoItemId);
+    Task<TodoItem?> GetById(int toDoItemId);
+    Task<List<TodoItem>?> GetAll();
 }

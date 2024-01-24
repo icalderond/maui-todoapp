@@ -4,19 +4,19 @@ using TodoApp.Shared.Models;
 
 namespace TodoApp.WebAPI.Data;
 
-public class ToDoItemSeed : IEntityTypeConfiguration<ToDoItem>
+public class ToDoItemSeed : IEntityTypeConfiguration<TodoItem>
 {
-    public void Configure(EntityTypeBuilder<ToDoItem> builder)
+    public void Configure(EntityTypeBuilder<TodoItem> builder)
     {
         builder.HasData(
-            new ToDoItem()
+            new TodoItem()
             {
                 Id = 1,
                 Title = "My Note",
                 Content =
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 UpdateDate = DateTime.Now
-            }, new ToDoItem()
+            }, new TodoItem()
             {
                 Id = 2,
                 Title = "My Note 2",
