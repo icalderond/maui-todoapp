@@ -5,7 +5,13 @@
              x:Class="TodoApp.Mobile.Pages.TodoItemsPage"
              xmlns:viewmodels="clr-namespace:TodoApp.Mobile.ViewModels"
              xmlns:models="clr-namespace:TodoApp.Shared.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Shell.NavBarIsVisible="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:ListToStringConverter x:Key="ListToStringConverter" Separator=" " />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid RowDefinitions="auto,auto,*,auto">
             <!-- Welcome user -->
@@ -38,60 +44,63 @@
                        TextColor="#7A69CA"
                        PlaceholderColor="DarkGray" />
 
-            <!-- Notes preview -->
-            <CollectionView Grid.Row="2"
-                            Margin="15,10"
-                            ItemsSource="{Binding TodoItems}"
-                            SelectionMode="Single">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical"
-                                     Span="2"
-                                     VerticalItemSpacing="20"
-                                     HorizontalItemSpacing="10" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame HasShadow="False"
-                               CornerRadius="30"
-                               Padding="0"
-                               IsClippedToBounds="True"
-                               HeightRequest="200"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"
-                               BackgroundColor="#FFFBEF"
-                               BorderColor="#FEEAA1">
-                            <Grid RowDefinitions="auto,*,auto">
-                                <Label Grid.Row="0"
-                                       Margin="10,15,10,0"
-                                       Text="{Binding TagsString}"
-                                       TextColor="Black" />
-                                <Label Grid.Row="1"
-                                       Margin="10,0"
-                                       Text="{Binding Title}"
-                                       TextColor="Black"
-                                       FontSize="Medium"
-                                       FontAttributes="Bold" />
-                                <Grid BackgroundColor="#FEEAA1"
-                                      Grid.Row="2"
-                                      Padding="20,15"
-                                      ColumnDefinitions="*,auto">
-                                    <Label Grid.Column="0"
-                                           Text="{Binding UpdateDate,StringFormat='{}{0:MMMM dd, h:mm tt}'}"
-                                           TextColor="Gray"
+            <RefreshView Grid.Row="2"
+                         Margin="15,10"
+                         Command="{Binding LoadDataCommand}"
+                         IsRefreshing="{Binding IsRefreshing}">
+                <!-- Notes preview -->
+                <CollectionView ItemsSource="{Binding TodoItems}"
+                                SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"
+                                         VerticalItemSpacing="20"
+                                         HorizontalItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HasShadow="False"
+                                   CornerRadius="30"
+                                   Padding="0"
+                                   IsClippedToBounds="True"
+                                   HeightRequest="200"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   BackgroundColor="#FFFBEF"
+                                   BorderColor="#FEEAA1">
+                                <Grid RowDefinitions="auto,*,auto">
+                                    <Label Grid.Row="0"
+                                           Margin="10,15,10,0"
+                                           Text="{Binding TagsString, Converter={StaticResource ListToStringConverter}}"
+                                           TextColor="Black" />
+                                    <Label Grid.Row="1"
+                                           Margin="10,0"
+                                           Text="{Binding Title}"
+                                           TextColor="Black"
+                                           FontSize="Medium"
                                            FontAttributes="Bold" />
-                                    <Label Grid.Column="1"
-                                           Text="..."
-                                           FontSize="Large"
-                                           HorizontalOptions="End"
-                                           HorizontalTextAlignment="End"
-                                           FontAttributes="Bold"
-                                           TextColor="Gray" />
+                                    <Grid BackgroundColor="#FEEAA1"
+                                          Grid.Row="2"
+                                          Padding="20,15"
+                                          ColumnDefinitions="*,auto">
+                                        <Label Grid.Column="0"
+                                               Text="{Binding UpdateDate,StringFormat='{}{0:MMMM dd, h:mm tt}'}"
+                                               TextColor="Gray"
+                                               FontAttributes="Bold" />
+                                        <Label Grid.Column="1"
+                                               Text="..."
+                                               FontSize="Large"
+                                               HorizontalOptions="End"
+                                               HorizontalTextAlignment="End"
+                                               FontAttributes="Bold"
+                                               TextColor="Gray" />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
 
             <Grid Grid.Row="2"
                   Margin="0,10,10,0"
@@ -100,7 +109,7 @@
                   BackgroundColor="Transparent">
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding OpenCreateNewNoteCommand}"
-                                          CommandParameter="{Binding .}"/>
+                                          CommandParameter="{Binding .}" />
                 </Grid.GestureRecognizers>
                 <Frame
                     BackgroundColor="#8270d3"

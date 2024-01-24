@@ -1,9 +1,11 @@
-using System.ComponentModel.DataAnnotations;
 using TodoApp.Shared.ModelsBase;
+using System.Text.Json.Serialization;
 
 namespace TodoApp.Shared.Models;
 
-public class TodoItem: TodoItemBase
+public class TodoItem : TodoItemBase
 {
-    public IEnumerable<Tag?> Tags { get; set; }
+    [JsonPropertyName("tags")] public IEnumerable<Tag?> Tags { get; set; }
+
+    public IEnumerable<string> TagsString { get; set; }
 }

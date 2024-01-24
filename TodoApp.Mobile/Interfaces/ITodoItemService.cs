@@ -4,5 +4,5 @@ namespace TodoApp.Mobile.Interfaces;
 
 public interface ITodoItemService
 {
-    Task<List<ToDoItem>?> GetAllTodo();
+    Task<List<TodoItem>?> GetAllTodo();
 }
