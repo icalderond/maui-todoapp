@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoApp.WebAPI.Contexts;
 
@@ -11,9 +12,11 @@ using TodoApp.WebAPI.Contexts;
 namespace TodoApp.WebAPI.Migrations
 {
     [DbContext(typeof(TodoEFContext))]
-    partial class TodoEFContextModelSnapshot : ModelSnapshot
+    [Migration("20240122024350_updateRelationship")]
+    partial class updateRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,12 +54,12 @@ namespace TodoApp.WebAPI.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ToDoItemId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Title")
-                        .IsUnique();
 
                     b.ToTable("Tag");
                 });
@@ -92,14 +95,14 @@ namespace TodoApp.WebAPI.Migrations
                             Id = 1,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "My Note",
-                            UpdateDate = new DateTime(2024, 1, 21, 20, 57, 16, 138, DateTimeKind.Local).AddTicks(2070)
+                            UpdateDate = new DateTime(2024, 1, 21, 20, 43, 50, 78, DateTimeKind.Local).AddTicks(6290)
                         },
                         new
                         {
                             Id = 2,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "My Note 2",
-                            UpdateDate = new DateTime(2024, 1, 21, 20, 57, 16, 138, DateTimeKind.Local).AddTicks(2120)
+                            UpdateDate = new DateTime(2024, 1, 21, 20, 43, 50, 78, DateTimeKind.Local).AddTicks(6330)
                         });
                 });
 
