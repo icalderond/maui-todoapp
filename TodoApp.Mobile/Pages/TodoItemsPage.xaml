@@ -42,7 +42,6 @@
             <CollectionView Grid.Row="2"
                             Margin="15,10"
                             ItemsSource="{Binding TodoItems}"
-                            ZIndex="1"
                             SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
@@ -96,16 +95,15 @@
 
             <Grid Grid.Row="2"
                   Margin="0,10,10,0"
-                  VerticalOptions="Start"
-                  HorizontalOptions="End"
-                  BackgroundColor="Magenta"
-                  ZIndex="2">
-                <!-- <Grid.GestureRecognizers> -->
-                <!--     <TapGestureRecognizer Command="{Binding OpenCreateNewNoteCommand}" -->
-                <!--                           CommandParameter="{Binding .}"/> -->
-                <!-- </Grid.GestureRecognizers> -->
+                  VerticalOptions="End"
+                  HorizontalOptions="Center"
+                  BackgroundColor="Transparent">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OpenCreateNewNoteCommand}"
+                                          CommandParameter="{Binding .}"/>
+                </Grid.GestureRecognizers>
                 <Frame
-                    BackgroundColor="Orange"
+                    BackgroundColor="#8270d3"
                     HeightRequest="50"
                     WidthRequest="50"
                     CornerRadius="25"
@@ -113,9 +111,6 @@
                     IsClippedToBounds="True"
                     HasShadow="False"
                     Padding="0">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenCreateNewNoteCommand}" />
-                    </Frame.GestureRecognizers>
                     <Label Text="+"
                            FontSize="40"
                            TextColor="White"
@@ -124,11 +119,6 @@
                            VerticalOptions="Center"
                            VerticalTextAlignment="Center" />
                 </Frame>
-                <BoxView BackgroundColor="Cyan" InputTransparent="False">
-                    <BoxView.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenCreateNewNoteCommand}" />
-                    </BoxView.GestureRecognizers>
-                </BoxView>
             </Grid>
         </Grid>
     </ContentPage.Content>

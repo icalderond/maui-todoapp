@@ -6,11 +6,18 @@
              Title="Assignment"
              Shell.NavBarHasShadow="True"
              Shell.NavBarIsVisible="True"
-             Shell.TitleColor="Black">
+             Shell.TitleColor="Black"
+             Shell.TabBarIsVisible="True">
     <ContentPage.Content>
-        <Grid RowDefinitions="auto,*">
+        <Grid RowDefinitions="auto,*,auto"
+              Padding="25,0">
             <Entry Grid.Row="0" Text="" Placeholder="Enter title" />
-            <Editor Grid.Row="1" Placeholder="Enter full note" />
+            <Editor Grid.Row="1" 
+                    Placeholder="Enter full note"
+                    VerticalOptions="StartAndExpand"/>
+            <Button Grid.Row="2" Text="Save" 
+                    BackgroundColor="#8270d3"
+                    FontAttributes="Bold"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
