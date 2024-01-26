@@ -50,10 +50,10 @@ public partial class TodoItemsViewModel : ObservableObject
         //await Shell.Current.GoToAsync("");
     }
 
-    [RelayCommand]
     /// <summary>
     /// Load initial data
     /// </summary>
+    [RelayCommand]
     private async Task LoadData()
     {
         try
@@ -74,6 +74,10 @@ public partial class TodoItemsViewModel : ObservableObject
         }
     }
 
+    /// <summary>
+    /// Open CreateNewNotePage
+    /// </summary>
+    /// <param name="arg"></param>
     [RelayCommand]
     private void OpenCreateNewNote(object arg)
     {

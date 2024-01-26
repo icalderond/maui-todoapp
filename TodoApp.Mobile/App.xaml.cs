@@ -1,4 +1,6 @@
-﻿namespace TodoApp.Mobile;
+﻿using Microsoft.Maui.Controls;
+
+namespace TodoApp.Mobile;
 
 public partial class App : Application
 {
