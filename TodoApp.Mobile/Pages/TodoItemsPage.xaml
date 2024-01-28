@@ -25,24 +25,47 @@
                     <Image WidthRequest="50" HeightRequest="50"
                            BackgroundColor="DarkSlateGray"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center" />
+                           VerticalOptions="Center"
+                           Source="{Binding RandomUser.Picture.Thumbnail}"/>
                 </Frame>
                 <VerticalStackLayout VerticalOptions="Center"
                                      Margin="10,0,0,0">
-                    <Label Text="Good morning" />
-                    <Label Text="Nazifa Tusi"
-                           FontAttributes="Bold"
-                           FontSize="Large" />
+                    <Label Text="Good morning" TextColor="#484556"/>
+                    <Label FontAttributes="Bold"
+                           FontSize="Medium"
+                           TextColor="#2a2939">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding RandomUser.Name.Title}"/>
+                                <Span Text=" "/>
+                                <Span Text="{Binding RandomUser.Name.First}"/>
+                                <Span Text=" "/>
+                                <Span Text="{Binding RandomUser.Name.Last}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
 
             <!-- Search -->
-            <SearchBar Grid.Row="1"
-                       Margin="15,0"
-                       Placeholder="Search your notes"
-                       BackgroundColor="#F4F2FF"
-                       TextColor="#7A69CA"
-                       PlaceholderColor="DarkGray" />
+            <!-- <SearchBar Grid.Row="1" -->
+            <!--            Margin="15" -->
+            <!--            Placeholder="Search your notes" -->
+            <!--            BackgroundColor="#F4F2FF" -->
+            <!--            TextColor="#7A69CA" -->
+            <!--            PlaceholderColor="DarkGray" /> -->
+            
+            <Grid Grid.Row="1" Margin="15">
+                <Border Stroke="#8473D1" 
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 15,15,15,15"
+                        BackgroundColor="#F4F2FF"
+                        Padding="10,0">
+                    <Entry Placeholder="Search your notes"
+                           TextColor="#423f51"
+                           PlaceholderColor="#c0badc"/>
+                </Border>
+            </Grid>
 
             <RefreshView Grid.Row="2"
                          Margin="15,10"
@@ -60,10 +83,10 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Frame HasShadow="False"
-                                   CornerRadius="30"
+                                   CornerRadius="20"
                                    Padding="0"
                                    IsClippedToBounds="True"
-                                   HeightRequest="200"
+                                   HeightRequest="150"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center"
                                    BackgroundColor="#FFFBEF"
@@ -72,21 +95,25 @@
                                     <Label Grid.Row="0"
                                            Margin="10,15,10,0"
                                            Text="{Binding TagsString, Converter={StaticResource ListToStringConverter}}"
-                                           TextColor="Black" />
+                                           TextColor="#423f51" />
                                     <Label Grid.Row="1"
                                            Margin="10,0"
                                            Text="{Binding Title}"
-                                           TextColor="Black"
-                                           FontSize="Medium"
-                                           FontAttributes="Bold" />
+                                           TextColor="#423f51"
+                                           FontSize="Large"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start" />
                                     <Grid BackgroundColor="#FEEAA1"
                                           Grid.Row="2"
-                                          Padding="20,15"
+                                          Padding="15,10"
                                           ColumnDefinitions="*,auto">
                                         <Label Grid.Column="0"
                                                Text="{Binding UpdateDate,StringFormat='{}{0:MMMM dd, h:mm tt}'}"
                                                TextColor="Gray"
-                                               FontAttributes="Bold" />
+                                               FontAttributes="Bold" 
+                                               MaxLines="1"
+                                               LineBreakMode="TailTruncation"/>
                                         <Label Grid.Column="1"
                                                Text="..."
                                                FontSize="Large"

@@ -1,7 +1,9 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 using TodoApp.Mobile.Interfaces;
 using TodoApp.Shared.Models;
 
@@ -11,6 +13,8 @@ public partial class CreateNewTodoItemViewModel : ObservableObject
 {
     #region Private Properties
     private readonly ITodoItemService _todoItemService;
+    private string _titleString;
+    private string _contentString;
     #endregion Private Properties
 
     #region Lifecycle Methods
@@ -23,20 +27,37 @@ public partial class CreateNewTodoItemViewModel : ObservableObject
         _ = Initialize();
     }
     #endregion Lifecycle Methods
-    
+
+    #region Public Properties
+    public string TitleString
+    {
+        get => _titleString;
+        set => SetProperty(ref _titleString, value);
+    }
+
+    public string ContentString
+    {
+        get => _contentString;
+        set => SetProperty(ref _contentString, value);
+    }
+    #endregion Public Properties
+
     #region Public Methods
     /// <summary>
     /// Load initial data
     /// </summary>
     private async Task Initialize()
     {
-        
     }
 
     [RelayCommand]
-    private async Task OpenNote(object arg)
+    private async Task GoBack(object arg)
     {
-        // _todoItemService
+        if (!string.IsNullOrEmpty(TitleString) && !string.IsNullOrEmpty(ContentString))
+        {
+            
+        }
+        await Shell.Current.GoToAsync("..");
     }
     #endregion Public Methods
 }

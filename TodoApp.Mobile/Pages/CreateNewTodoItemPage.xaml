@@ -3,21 +3,70 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoApp.Mobile.Pages.CreateNewTodoItemPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="Assignment"
              Shell.NavBarHasShadow="True"
-             Shell.NavBarIsVisible="True"
+             Shell.NavBarIsVisible="False"
              Shell.TitleColor="Black"
-             Shell.TabBarIsVisible="True">
+             Shell.TabBarIsVisible="False">
     <ContentPage.Content>
-        <Grid RowDefinitions="auto,*,auto"
+        <Grid RowDefinitions="auto,auto,*"
               Padding="25,0">
-            <Entry Grid.Row="0" Text="" Placeholder="Enter title" />
-            <Editor Grid.Row="1" 
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="2*,6*,1*,1*">
+                <Image Grid.Column="0"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Source="ic_arrow_left">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="#29344e" />
+                    </Image.Behaviors>
+                    </Image>
+                <Label Grid.Column="1"
+                       Text="Assignment"
+                       FontAttributes="Bold"
+                       FontSize="Medium"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="FillAndExpand" />
+                <Image Grid.Column="2"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Source="ic_pin">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="#d0caf2" />
+                    </Image.Behaviors>
+                </Image>
+                <Image Grid.Column="3"
+                       WidthRequest="25"
+                       HeightRequest="25"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Source="ic_bell">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="#d0caf2" />
+                    </Image.Behaviors>
+                </Image>
+            </Grid>
+            <Border Grid.Row="1"
+                    Margin="0,15"
+                    Stroke="#d8cfff"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 15,15,15,15">
+                <Entry Text="" Placeholder="Enter title" />
+            </Border>
+            <Border Grid.Row="2"
+                    Stroke="#d8cfff"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 15,15,15,15">
+                <Editor
                     Placeholder="Enter full note"
-                    VerticalOptions="StartAndExpand"/>
-            <Button Grid.Row="2" Text="Save" 
-                    BackgroundColor="#8270d3"
-                    FontAttributes="Bold"/>
+                    VerticalOptions="StartAndExpand" />
+            </Border>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
