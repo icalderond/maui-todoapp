@@ -34,6 +34,7 @@ public static class MauiProgram
         
         // Services
         builder.Services.AddSingleton<ITodoItemService, TodoItemService>();
+        builder.Services.AddSingleton<IRandomUserService, RandomUserService>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
