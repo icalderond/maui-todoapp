@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TodoApp.Mobile.Helpers.AppSettings;
 using TodoApp.Mobile.Helpers.Services;
 using TodoApp.Mobile.Interfaces;
 using TodoApp.Shared.Models;
@@ -13,14 +14,12 @@ namespace TodoApp.Mobile.Services;
 
 public class TodoItemService : HttpClientService,ITodoItemService
 {
-    private readonly string _getAllMethod = "todoitems";
-
     public async Task<List<TodoItem>?> GetAllTodo()
     {
         List<TodoItem>? toDoItems = null;
         try
         {
-            var response = await CallGetAsync<List<TodoItem>>(UrlBaseWebApi + _getAllMethod);
+            var response = await CallGetAsync<List<TodoItem>>(UrlBaseWebApi + ApiSettingKeys.CRUDName);
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 toDoItems = response.Content;

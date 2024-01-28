@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TodoApp.Mobile.Helpers.AppSettings;
 
 namespace TodoApp.Mobile.Helpers.Services;
 
@@ -30,9 +31,14 @@ public class HttpClientService : HttpClient
         InitHeaders();
     }
 
-    public string UrlBaseWebApi { get; set; } = "http://192.168.1.102:5049/";
+    public string UrlBaseWebApi
+    {
+        get => _urlBaseWebApi;
+        set => _urlBaseWebApi = value;
+    }
 
     string urlController;
+    private string _urlBaseWebApi = ApiSettingKeys.BaseHost;
 
     protected string UrlController
     {
@@ -48,13 +54,6 @@ public class HttpClientService : HttpClient
     void InitHeaders()
     {
         DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-        // DefaultRequestHeaders.Add("ZUMO-API-VERSION", "2.0.0");
-        // if (!string.IsNullOrEmpty(Helpers.Parametros.Token))
-        // {
-        //     DefaultRequestHeaders.Remove("Token");
-        //     DefaultRequestHeaders.Add("Token", Helpers.Parametros.Token);
-        //     DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", Helpers.Parametros.Token);
-        // }
     }
 
     public virtual async Task<(HttpStatusCode StatusCode, TResponse Content)> CallPostAsync<TRequest, TResponse>(
@@ -154,11 +153,6 @@ public class HttpClientService : HttpClient
                 else
                 {
                     var errorJson = res.Content.ReadAsStringAsync().Result;
-
-                    // SiconNetException error = null;
-                    // if (TryDeserialize(errorJson, ref error))
-                    //     return (res.StatusCode, default(T), error?.Error);
-                    // else
                     return (res.StatusCode, default(T), errorJson);
                 }
             }
