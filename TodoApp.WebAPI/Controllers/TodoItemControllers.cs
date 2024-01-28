@@ -28,13 +28,17 @@ public class TodoItemControllers : Controller
     [HttpDelete("{toDoItemId}")]
     public async Task<object> Remove(int toDoItemId)
     {
-        return await _UnitOfWork._ToDoItemRepository.Delete(toDoItemId);
+        var todoItem = await _UnitOfWork._ToDoItemRepository.Delete(toDoItemId);
+        if (todoItem == null) return NotFound("Item with Id specified wa not found");
+        return todoItem;
     }
 
     [HttpGet("{todoItemId}")]
-    public async Task<TodoItem?> GetById(int todoItemId)
+    public async Task<object?> GetById(int todoItemId)
     {
-        return await _UnitOfWork._ToDoItemRepository.GetById(todoItemId);
+        var todoItem =await _UnitOfWork._ToDoItemRepository.GetById(todoItemId);
+        if (todoItem == null) return NotFound("Item with Id specified wa not found");
+        return todoItem;
     }
 
     [HttpGet()]

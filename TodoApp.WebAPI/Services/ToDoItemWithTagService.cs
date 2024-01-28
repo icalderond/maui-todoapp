@@ -50,10 +50,12 @@ public class ToDoItemWithTagService
                 Tags = tagsToInclude
             };
 
-            if (tagsToDb?.Any() == true) tagsToDb.ForEach(x => x.ToDoItems = new List<TodoItem>() { todoItem });
-            
+            if (tagsToDb?.Any() == true)
+                tagsToDb
+                    .ForEach(x => x.ToDoItems = new List<TodoItem>() { todoItem });
+
             await _UnitOfWork._ToDoItemRepository.Insert(todoItem);
-            if (tagsToDb?.Any() == true) 
+            if (tagsToDb?.Any() == true)
                 await _UnitOfWork._TagRepository.Insert(tagsToDb);
             await _UnitOfWork.Save();
         }

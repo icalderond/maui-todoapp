@@ -23,16 +23,19 @@ public class ToDoItemRepository : IToDoItemRepository
     public async Task<TodoItem?> Delete(int toDoItemId)
     { 
         var todoItem = _context.ToDoItem.FirstOrDefault(x => x.Id == toDoItemId);
+        if (todoItem == null) return todoItem;
         var insertedUser =  _context.ToDoItem.Remove(todoItem);
         await _context.SaveChangesAsync();
-        return insertedUser.Entity;
+        return insertedUser?.Entity;
     }
 
     public async Task<TodoItem?> GetById(int toDoItemId)
     {
-        return await _context.ToDoItem
+        var todoItem = await _context.ToDoItem
             .Include(x => x.Tags)
             .FirstOrDefaultAsync(x => x.Id == toDoItemId);
+        if (todoItem == null) return todoItem;
+        return todoItem;
     }
 
     public async Task<List<TodoItem>?> GetAll()
