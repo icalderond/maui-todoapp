@@ -8,7 +8,4 @@ public class TodoItem : TodoItemBase
 {
     [JsonPropertyName("tags")] 
     public IEnumerable<Tag?> Tags { get; set; }
-
-    [NotMapped]
-    public IEnumerable<string> TagsString { get; set; }
 }
