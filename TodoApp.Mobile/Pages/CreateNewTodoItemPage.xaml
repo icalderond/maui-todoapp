@@ -21,9 +21,12 @@
                        HorizontalOptions="Start"
                        Source="ic_arrow_left">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="#29344e" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource JapaneseIndigo}" />
                     </Image.Behaviors>
-                    </Image>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Label Grid.Column="1"
                        Text="Assignment"
                        FontAttributes="Bold"
@@ -32,23 +35,17 @@
                        HorizontalTextAlignment="Center"
                        HorizontalOptions="FillAndExpand" />
                 <Image Grid.Column="2"
-                       WidthRequest="25"
-                       HeightRequest="25"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
+                       Style="{StaticResource IconStyle}"
                        Source="ic_pin">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="#d0caf2" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Soap}" />
                     </Image.Behaviors>
                 </Image>
                 <Image Grid.Column="3"
-                       WidthRequest="25"
-                       HeightRequest="25"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
+                       Style="{StaticResource IconStyle}"
                        Source="ic_bell">
                     <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="#d0caf2" />
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Soap}" />
                     </Image.Behaviors>
                 </Image>
             </Grid>

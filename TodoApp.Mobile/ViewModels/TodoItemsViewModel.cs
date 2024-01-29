@@ -1,12 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
+using TodoApp.Mobile.Helpers.UI;
 using TodoApp.Mobile.Interfaces;
 using TodoApp.Mobile.Model;
-using TodoApp.Shared.Models;
 
 namespace TodoApp.Mobile.ViewModels;
 
@@ -16,8 +17,8 @@ public partial class TodoItemsViewModel : ObservableObject
     private readonly ITodoItemService _todoItemService;
     private readonly IRandomUserService _randomUserService;
     private bool _isRefreshing;
-    private ObservableCollection<TodoItem> _todoItems;
-    private RandomUser _randomUser;
+    private ObservableCollection<TodoItemClient> _todoItems;
+    private RandomUser? _randomUser;
     #endregion Private Properties
 
     #region Lifecycle Methods
@@ -33,14 +34,13 @@ public partial class TodoItemsViewModel : ObservableObject
     #endregion Lifecycle Methods
 
     #region Public Properties
-
-    public ObservableCollection<TodoItem> TodoItems
+    public ObservableCollection<TodoItemClient> TodoItems
     {
         get => _todoItems;
         set => SetProperty(ref _todoItems, value);
     }
 
-    public RandomUser RandomUser
+    public RandomUser? RandomUser
     {
         get => _randomUser;
         set => SetProperty(ref _randomUser, value);
@@ -71,7 +71,17 @@ public partial class TodoItemsViewModel : ObservableObject
             IsRefreshing = true;
             //Load data
             var todoItems = await _todoItemService.GetAllTodo();
-            if (todoItems != null) TodoItems = new ObservableCollection<TodoItem>(todoItems);
+            if (todoItems != null)
+            {
+                todoItems?.ForEach(td =>
+                {
+                    var tuplaColors = RandomTuplaColor.GetRandomTuplaColor();
+                    td.TagsString = td.Tags.Select(x => x.Title);
+                    td.SoftColor = tuplaColors.Item1;
+                    td.SolidColor = tuplaColors.Item2;
+                });
+                TodoItems = new ObservableCollection<TodoItemClient>(todoItems);
+            }
 
             RandomUser = await _randomUserService.GetRandomUser();
         }

@@ -6,6 +6,7 @@
              xmlns:viewmodels="clr-namespace:TodoApp.Mobile.ViewModels"
              xmlns:models="clr-namespace:TodoApp.Shared.Models"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:uiControls="clr-namespace:TodoApp.Mobile.UIControls"
              Shell.NavBarIsVisible="False">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -15,9 +16,13 @@
     <ContentPage.Content>
         <Grid RowDefinitions="auto,auto,*,auto">
             <!-- Welcome user -->
-            <HorizontalStackLayout Padding="15,0"
-                                   Grid.Row="0">
-                <Frame CornerRadius="25" HeightRequest="50" WidthRequest="50"
+            <Grid Grid.Row="0"
+                  Padding="15,0"
+                  ColumnDefinitions="auto,auto,*">
+                <Frame Grid.Column="0"
+                       CornerRadius="25"
+                       HeightRequest="50"
+                       WidthRequest="50"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
                        HasShadow="False"
@@ -26,44 +31,55 @@
                            BackgroundColor="DarkSlateGray"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
-                           Source="{Binding RandomUser.Picture.Thumbnail}"/>
+                           Source="{Binding RandomUser.Picture.Thumbnail}" />
                 </Frame>
-                <VerticalStackLayout VerticalOptions="Center"
+                <VerticalStackLayout Grid.Column="1"
+                                     VerticalOptions="Center"
                                      Margin="10,0,0,0">
-                    <Label Text="Good morning" TextColor="#484556"/>
+                    <Label Text="Good morning" TextColor="#484556" />
                     <Label FontAttributes="Bold"
                            FontSize="Medium"
                            TextColor="#2a2939">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="{Binding RandomUser.Name.Title}"/>
-                                <Span Text=" "/>
-                                <Span Text="{Binding RandomUser.Name.First}"/>
-                                <Span Text=" "/>
-                                <Span Text="{Binding RandomUser.Name.Last}"/>
+                                <Span Text="{Binding RandomUser.Name.Title}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding RandomUser.Name.First}" />
+                                <Span Text=" " />
+                                <Span Text="{Binding RandomUser.Name.Last}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
                 </VerticalStackLayout>
-            </HorizontalStackLayout>
-
-            <!-- Search -->
-            <!-- <SearchBar Grid.Row="1" -->
-            <!--            Margin="15" -->
-            <!--            Placeholder="Search your notes" -->
-            <!--            BackgroundColor="#F4F2FF" -->
-            <!--            TextColor="#7A69CA" -->
-            <!--            PlaceholderColor="DarkGray" /> -->
-            
+                <Image Grid.Column="2"
+                       Style="{StaticResource IconStyle}"
+                       Source="ic_bell">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource Soap}" />
+                    </Image.Behaviors>
+                </Image>
+            </Grid>
             <Grid Grid.Row="1" Margin="15">
-                <Border Stroke="#8473D1" 
+                <Border Stroke="#8473D1"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 15,15,15,15"
                         BackgroundColor="#F4F2FF"
                         Padding="10,0">
-                    <Entry Placeholder="Search your notes"
-                           TextColor="#423f51"
-                           PlaceholderColor="#c0badc"/>
+                    <Grid ColumnDefinitions="*,auto">
+                        <uiControls:BorderlessEntry Grid.Column="0" 
+                                                    Placeholder="Search your notes"
+                                                    TextColor="#423f51"
+                                                    HeightRequest="45"
+                                                    PlaceholderColor="#c0badc" 
+                                                    FontSize="Medium"/>
+                        <Image Grid.Column="1"
+                               Style="{StaticResource IconStyle}"
+                               Source="ic_glass">
+                            <Image.Behaviors>
+                                <toolkit:IconTintColorBehavior TintColor="{StaticResource Soap}" />
+                            </Image.Behaviors>
+                        </Image>
+                    </Grid>
                 </Border>
             </Grid>
 
@@ -73,7 +89,7 @@
                          IsRefreshing="{Binding IsRefreshing}">
                 <!-- Notes preview -->
                 <CollectionView ItemsSource="{Binding TodoItems}"
-                                SelectionMode="Single">
+                                VerticalScrollBarVisibility="Never">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Orientation="Vertical"
                                          Span="2"
@@ -89,8 +105,8 @@
                                    HeightRequest="150"
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center"
-                                   BackgroundColor="#FFFBEF"
-                                   BorderColor="#FEEAA1">
+                                   BackgroundColor="{Binding SoftColor}"
+                                   BorderColor="{Binding SolidColor}">
                                 <Grid RowDefinitions="auto,*,auto">
                                     <Label Grid.Row="0"
                                            Margin="10,15,10,0"
@@ -103,17 +119,18 @@
                                            FontSize="Large"
                                            FontAttributes="Bold"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="Start" />
-                                    <Grid BackgroundColor="#FEEAA1"
+                                           HorizontalOptions="Start"
+                                           LineBreakMode="WordWrap"/>
+                                    <Grid BackgroundColor="{Binding SolidColor}"
                                           Grid.Row="2"
                                           Padding="15,10"
                                           ColumnDefinitions="*,auto">
                                         <Label Grid.Column="0"
                                                Text="{Binding UpdateDate,StringFormat='{}{0:MMMM dd, h:mm tt}'}"
                                                TextColor="Gray"
-                                               FontAttributes="Bold" 
+                                               FontAttributes="Bold"
                                                MaxLines="1"
-                                               LineBreakMode="TailTruncation"/>
+                                               LineBreakMode="TailTruncation" />
                                         <Label Grid.Column="1"
                                                Text="..."
                                                FontSize="Large"
