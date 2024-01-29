@@ -24,7 +24,7 @@ public class ToDoItemWithTagService
                 UpdateDate = DateTime.Now
             };
 
-            var listOfTagRequests = todoItemRequest.TagRequests.ToList();
+            var listOfTagRequests = todoItemRequest?.TagRequests?.ToList()??new List<TagRequest>();
             var tagsForTodo = new List<Tag>();
             var tagsToInsert = new List<Tag>();
 
