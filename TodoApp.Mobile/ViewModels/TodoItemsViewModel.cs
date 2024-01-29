@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ using TodoApp.Mobile.Model;
 
 namespace TodoApp.Mobile.ViewModels;
 
-public partial class TodoItemsViewModel : ObservableObject
+public partial class TodoItemsViewModel : ObservableObject, IQueryAttributable
 {
     #region Private Properties
     private readonly ITodoItemService _todoItemService;
@@ -80,6 +81,7 @@ public partial class TodoItemsViewModel : ObservableObject
                     td.SoftColor = tuplaColors.Item1;
                     td.SolidColor = tuplaColors.Item2;
                 });
+                todoItems = todoItems?.OrderByDescending(x => x.UpdateDate).ToList();
                 TodoItems = new ObservableCollection<TodoItemClient>(todoItems);
             }
 
@@ -106,4 +108,14 @@ public partial class TodoItemsViewModel : ObservableObject
         Shell.Current.GoToAsync(nameof(CreateNewTodoItemViewModel));
     }
     #endregion Public Methods
+
+    public async void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.ContainsKey("reload"))
+        {
+            await LoadData();
+        }
+
+        query.Clear();
+    }
 }

@@ -58,17 +58,21 @@
                     StrokeShape="RoundRectangle 15,15,15,15">
                 <uiControls:BorderlessEntry HeightRequest="45" 
                                             Placeholder="Enter title" 
-                                            FontSize="Medium"/>
+                                            FontSize="Medium"
+                                            FontAttributes="Bold"
+                                            Text="{Binding TitleString}"/>
             </Border>
             <Border Grid.Row="2"
                     Stroke="#d8cfff"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 15,15,15,15"
-                    Padding="15,5">
+                    Padding="15">
                 <Editor
                     Placeholder="Enter full note"
-                    VerticalOptions="StartAndExpand" 
-                    FontSize="Medium"/>
+                    VerticalOptions="StartAndExpand"
+                    VerticalTextAlignment="Start"
+                    FontSize="Medium"
+                    Text="{Binding ContentString}"/>
             </Border>
         </Grid>
     </ContentPage.Content>

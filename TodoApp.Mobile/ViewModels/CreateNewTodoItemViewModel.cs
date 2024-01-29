@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using TodoApp.Mobile.Interfaces;
+using TodoApp.Mobile.Model;
 using TodoApp.Shared.Models;
 
 namespace TodoApp.Mobile.ViewModels;
@@ -55,9 +56,17 @@ public partial class CreateNewTodoItemViewModel : ObservableObject
     {
         if (!string.IsNullOrEmpty(TitleString) && !string.IsNullOrEmpty(ContentString))
         {
-            
+            await _todoItemService.SaveTodoItem(new TodoItemClient()
+            {
+                Title = TitleString,
+                Content = ContentString
+            });
+            await Shell.Current.GoToAsync($"..?reload=true");
         }
-        await Shell.Current.GoToAsync("..");
+        else
+        {
+            await Shell.Current.GoToAsync("..");
+        }
     }
     #endregion Public Methods
 }
