@@ -7,4 +7,5 @@ namespace TodoApp.Mobile.Interfaces;
 public interface ITodoItemService
 {
     Task<List<TodoItemClient>?> GetAllTodo();
+    Task<bool> SaveTodoItem(TodoItemClient todoItemClient);
 }

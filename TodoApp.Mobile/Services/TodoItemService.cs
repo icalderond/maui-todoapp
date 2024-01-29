@@ -10,7 +10,7 @@ using TodoApp.Mobile.Model;
 
 namespace TodoApp.Mobile.Services;
 
-public class TodoItemService : HttpClientService,ITodoItemService
+public class TodoItemService : HttpClientService, ITodoItemService
 {
     public async Task<List<TodoItemClient>?> GetAllTodo()
     {
@@ -28,6 +28,23 @@ public class TodoItemService : HttpClientService,ITodoItemService
             Console.WriteLine(e);
             throw;
         }
+
         return toDoItems;
+    }
+
+    public async Task<bool> SaveTodoItem(TodoItemClient todoItemClient)
+    {
+        try
+        {
+            var response =
+                await CallPostAsync<TodoItemClient, bool>(UrlBaseWebApi + ApiSettingKeys.CRUDName, todoItemClient);
+            return response.Content;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+        return false;
     }
 }
