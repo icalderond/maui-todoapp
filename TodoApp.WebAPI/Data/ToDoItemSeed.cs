@@ -12,14 +12,57 @@ public class ToDoItemSeed : IEntityTypeConfiguration<TodoItem>
             new TodoItem()
             {
                 Id = 1,
-                Title = "My Note",
+                Title = "Physic assignment",
                 Content =
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 UpdateDate = DateTime.Now
             }, new TodoItem()
             {
                 Id = 2,
-                Title = "My Note 2",
+                Title = "Microprocessor final lab test",
+                Content =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                UpdateDate = DateTime.Now
+            }, new TodoItem()
+            {
+                Id = 3,
+                Title = "Digital Electronics lab",
+                Content =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                UpdateDate = DateTime.Now
+            }, new TodoItem()
+            {
+                Id = 4,
+                Title = "Microprocessor final lab test",
+                Content =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                UpdateDate = DateTime.Now
+            }, new TodoItem()
+            {
+                Id = 5,
+                Title = "10 Home work pending",
+                Content =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                UpdateDate = DateTime.Now
+            }, new TodoItem()
+            {
+                Id = 6,
+                Title = "Chemistry assignment",
+                Content =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                UpdateDate = DateTime.Now
+            }, new TodoItem()
+            {
+                Id = 7,
+                Title = "Discrete Math notes",
+                Content =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                UpdateDate = DateTime.Now
+            },
+            new TodoItem()
+            {
+                Id = 8,
+                Title = "Physic assignment",
                 Content =
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 UpdateDate = DateTime.Now
