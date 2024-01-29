@@ -1,5 +1,5 @@
 using Microsoft.Maui;
-using System.Drawing;
+using TodoApp.Mobile.UIControls;
 
 #if IOS
 using UIKit;
@@ -35,16 +35,19 @@ public static class FormHandler
     {
         Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping("Borderless", (handler, view) =>
         {
+            if (view is BorderlessEntry)
+            {
 #if ANDROID
             handler.PlatformView.Background = null;
             handler.PlatformView.SetBackgroundColor(Android.Graphics.Color.Transparent);
             handler.PlatformView.BackgroundTintList =
  Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToAndroid());
 #elif IOS
-            handler.PlatformView.BackgroundColor = UIKit.UIColor.Clear;
-            handler.PlatformView.Layer.BorderWidth = 0;
-            handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
+                handler.PlatformView.BackgroundColor = UIKit.UIColor.Clear;
+                handler.PlatformView.Layer.BorderWidth = 0;
+                handler.PlatformView.BorderStyle = UIKit.UITextBorderStyle.None;
 #endif
+            }
         });
     }
 }
