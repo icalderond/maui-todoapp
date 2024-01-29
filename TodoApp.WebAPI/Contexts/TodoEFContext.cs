@@ -22,6 +22,14 @@ public class TodoEFContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<TodoItem>()
+            .Property(x => x.Id)
+            .ValueGeneratedOnAdd();
+        
+        modelBuilder.Entity<Tag>()
+            .Property(x => x.Id)
+            .ValueGeneratedOnAdd();
+        
         modelBuilder.Entity<Tag>()
             .HasIndex(x => x.Title)
             .IsUnique();

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoApp.WebAPI.Contexts;
 
@@ -11,9 +12,11 @@ using TodoApp.WebAPI.Contexts;
 namespace TodoApp.WebAPI.Migrations
 {
     [DbContext(typeof(TodoEFContext))]
-    partial class TodoEFContextModelSnapshot : ModelSnapshot
+    [Migration("20240129033800_AddIdentityToTagTodoItem")]
+    partial class AddIdentityToTagTodoItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,6 @@ namespace TodoApp.WebAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnOrder(0)
                         .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
@@ -70,7 +72,6 @@ namespace TodoApp.WebAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnOrder(0)
                         .HasAnnotation("Relational:JsonPropertyName", "id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
@@ -101,56 +102,56 @@ namespace TodoApp.WebAPI.Migrations
                             Id = 1,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Physic assignment",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9780)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(4970)
                         },
                         new
                         {
                             Id = 2,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Microprocessor final lab test",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9810)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5000)
                         },
                         new
                         {
                             Id = 3,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Digital Electronics lab",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9810)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5000)
                         },
                         new
                         {
                             Id = 4,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Microprocessor final lab test",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9820)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5000)
                         },
                         new
                         {
                             Id = 5,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "10 Home work pending",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9820)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5000)
                         },
                         new
                         {
                             Id = 6,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Chemistry assignment",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9820)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5000)
                         },
                         new
                         {
                             Id = 7,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Discrete Math notes",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9820)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5000)
                         },
                         new
                         {
                             Id = 8,
                             Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                             Title = "Physic assignment",
-                            UpdateDate = new DateTime(2024, 1, 28, 22, 38, 33, 95, DateTimeKind.Local).AddTicks(9820)
+                            UpdateDate = new DateTime(2024, 1, 28, 21, 37, 59, 964, DateTimeKind.Local).AddTicks(5010)
                         });
                 });
 
