@@ -28,6 +28,7 @@ public partial class TodoItemsViewModel : ObservableObject, IQueryAttributable
     /// </summary>
     public TodoItemsViewModel(ITodoItemService todoItemService, IRandomUserService randomUserService)
     {
+        // _todoItemService = Application.Current.MainPage.Handler.MauiContext?.Services.GetService<ITodoItemService>();
         _todoItemService = todoItemService;
         _randomUserService = randomUserService;
         _ = LoadData();
