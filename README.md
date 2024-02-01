@@ -31,6 +31,9 @@ Dribbble UI [Notebook Mobile App](https://dribbble.com/shots/23185462-Notebook-M
 * Repository
 * PreLoad data seed
 
+### Web Service CRUD
+![Screenshot](Screenshot/web_service_crud.png)
+
 ### Results
 ![Screenshot](Screenshot/iOS_note1.png)
 ![Screenshot](Screenshot/iOS_note2.png)
