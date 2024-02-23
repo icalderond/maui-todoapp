@@ -86,7 +86,8 @@ public partial class TodoItemsViewModel : ObservableObject, IQueryAttributable
                 TodoItems = new ObservableCollection<TodoItemClient>(todoItems);
             }
 
-            RandomUser = await _randomUserService.GetRandomUser();
+            if (RandomUser is null)
+                RandomUser = await _randomUserService.GetRandomUser();
         }
         catch (Exception e)
         {
